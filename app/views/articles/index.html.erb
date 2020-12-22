@@ -1,0 +1,19 @@
+<% provide :title, 'メニュー一覧' %>
+
+<div class='container'>
+  <h2>メニュー一覧</h2>
+  <%= render 'search' %>
+
+  <div class='article'>
+    <% if @articles.count == 0%>
+      <div class = 'no-hit'>
+        <h2>一致する項目は見つかりません</h2>
+      </div>
+    <% else %>
+      <%= render @articles %>
+    <% end %>
+  </div>
+  <div>
+    <%= paginate @articles %>
+  </div>
+</div>

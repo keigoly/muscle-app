@@ -1,0 +1,70 @@
+<div class='col-xl-4 col-md-6'>
+  <div class='article-card'>
+    <%= link_to article_path(article.id), class: 'non-link-decoration' do %>
+      <div class='card-title'>
+          <h3><%= article.title %></h3>
+      </div>
+      <div class='card-middle'>
+        <div class='card-middle-wrapper'>
+          <div>
+            <ul class='tag-list'>
+              <% if article.tags.present? %>
+                <% article.tags.each do |tag| %>
+                  <li class='tag-item tag-style'><%= tag.name%></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+          <div>
+            <div class='card-btn'>
+              <div class='col-6'>
+                <% if user_signed_in? && current_user.already_favorite?(article) %>
+                    <i class='fas fa-thumbs-up'></i>
+                    <span><%= article.favorites.count%></span>
+                <% else %>
+                    <i class='far fa-thumbs-up'></i>
+                    <span><%= article.favorites.count%></span>
+                <% end %>
+              </div>
+              <div class='col-6'>
+                <i class="far fa-comments"></i>
+                <span><%= article.comments.count %></span>
+              </div>
+            </div>
+            <div class='card-user'>
+              <div>
+                <% if article.user.image? %>
+                  <%= image_tag article.user.image.url, class: 'avatar-img small-img' %>
+                <% else %>
+                  <%= image_tag "/assets/default.png", class: 'avatar-img small-img' %>
+                <% end %>
+              </div>
+              <div class='card-user-content'>
+                  <span><%= article.user.user_name%></span>
+              </div>
+            </div>
+            <p>投稿日：<%= article.created_at.to_s(:date_jp)%></p>
+          </div>
+        </div>
+        <div class='card-middle-wrapper'>
+          <div>
+            <% if article.target_site.muscle_name == '胸' %>
+              <%= image_tag('chest.png', alt: 'chest', class: 'card-image') %>
+            <% elsif article.target_site.muscle_name == '腕' %>
+              <%= image_tag('arm.png', alt: 'arm', class: 'card-image') %>
+            <% elsif article.target_site.muscle_name == '肩' %>
+              <%= image_tag('sholder.png', alt: 'sholder', class: 'card-image') %>
+            <% elsif article.target_site.muscle_name == '腹' %>
+              <%= image_tag('abs.png', alt: 'abs', class: 'card-image') %>
+            <% elsif article.target_site.muscle_name == '背中' %>
+              <%= image_tag('back.png', alt: 'back', class: 'card-image') %>
+            <% elsif article.target_site.muscle_name == '脚' %>
+              <%= image_tag('leg.png', alt: 'leg', class: 'card-image') %>
+            <% end %>
+            <p class='text-center'>鍛えられる部位</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

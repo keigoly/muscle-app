@@ -1,0 +1,36 @@
+<% provide :title, 'ログイン' %>
+
+<div class='container'>
+  <div class='user_form form-wrapper'>
+    <h2>ログイン</h2>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+      <div class="field form-group">
+        <%= f.label :email, "メールアドレス" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :password, 'パスワード' %><br />
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field form-group">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, '次回から自動的にログイン' %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "ログイン" %>
+      </div>
+    <% end %>
+    <div>
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post , class: 'btn btn-secondary btn-sm guest-btn'%>
+    </div>
+    <div>
+      <%= render "users/shared/links" %>
+    </div>
+</div>
